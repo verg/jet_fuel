@@ -6,3 +6,4 @@ gem "rspec"
 gem "sinatra"
 gem "rack-test"
 gem "capybara"
+gem 'selenium-webdriver'
