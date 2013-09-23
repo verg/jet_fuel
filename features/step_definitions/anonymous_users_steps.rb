@@ -1,9 +1,11 @@
+require './spec/spec_helper'
+
 Given(/^that I am an anonymous user of the system$/) do
-    pending # express the regexp above with the code you wish you had
+
 end
 
 When(/^I visit the site$/) do
-    pending # express the regexp above with the code you wish you had
+  visit '/'
 end
 
 When(/^give a URL to the service$/) do
