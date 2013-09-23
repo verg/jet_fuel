@@ -6,6 +6,8 @@ When(/^I visit the site$/) do
 end
 
 When(/^give a URL to the service$/) do
+  fill_in "url", with: "www.example.com/url/1"
+  click_button "Shorten URL"
 end
 
 Then(/^I expect it to return a service shortened URL$/) do

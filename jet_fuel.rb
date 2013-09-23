@@ -1,7 +1,7 @@
 require 'sinatra'
 
 class JetFuel < Sinatra::Base
-  get '/' do
-    "the hookup"
+  match("URL Shortening Service") get '/' do
+    erb :index
   end
 end
