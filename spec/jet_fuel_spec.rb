@@ -10,5 +10,14 @@ describe "the JetFuel app" do
   end
 
   describe "POST '/'" do
+    context "with valid attribues" do
+      it "re-renders the home page with the shortened url" do
+        post '/', shorten: "www.example.com/thing/1"
+        expect(last_response.body).to match(/jet\.com\/\w+/)
+      end
+    end
+
+    context "with invalid attributes" do
+    end
   end
 end
