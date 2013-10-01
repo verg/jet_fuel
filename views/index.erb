@@ -8,5 +8,12 @@
   <input type='text' name="url" placeholder="www.example.com"/></br>
   <input name="url_to_shorten" type='submit' value="Shorten URL"/>
 </form>
+<ul>
+  <% uris.each do |uri| %>
+    <li>
+  <%= uri[:short_uri] %>
+  </li>
+<% end %>
+</ul>
 </body>
 </html>

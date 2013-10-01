@@ -11,5 +11,5 @@ When(/^give a URL to the service$/) do
 end
 
 Then(/^I expect it to return a service shortened URL$/) do
-  expect(page).to have_content(/jet\.com\/\w+/)
+  expect(page).to have_content(/jet\.io\/\w+/)
 end
