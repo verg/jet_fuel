@@ -3,19 +3,20 @@ require 'yaml/store'
 class PersistedURI
   @@database ||= []
 
+  attr_reader :short_urn
+
   def initialize(args)
-    @short_uri = args.fetch(:short_uri)
+    @short_urn = args.fetch(:short_urn)
     @long_uri = args.fetch(:long_uri)
   end
 
   def save
-    uri = { short_uri: @short_uri, long_uri: @long_uri }
-    @@database << uri
-    uri
+    @@database << self
+    self
   end
 
-  def self.find_by_uri(short_uri)
-    @@database.select { |uri| uri[:short_uri] == short_uri }.first
+  def self.find_by_urn(short_urn)
+    @@database.select { |uri| uri.short_urn == short_urn }.first
   end
 
   def self.all
