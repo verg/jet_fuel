@@ -11,9 +11,16 @@ describe "the JetFuel app" do
 
   describe "POST '/'" do
     context "with valid attribues" do
+      it "persists the uri" do
+        uri = "www.example.com/thing/1"
+        PersistedURI.any_instance.should_receive(:save)
+        post '/', shorten: uri
+      end
+
       it "re-renders the home page with the shortened url" do
-        post '/', shorten: "www.example.com/thing/1"
-        expect(last_response.body).to match(/jet\.com\/\w+/)
+        post '/', uri_to_shorten: "www.example.com/thing/1"
+        follow_redirect!
+        expect(last_response.body).to match(/jet\.io\/\w+/)
       end
     end
 
