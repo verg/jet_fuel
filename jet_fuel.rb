@@ -4,7 +4,7 @@ require './jet_fuel/uri_shortener'
 
 class JetFuel < Sinatra::Base
   get '/' do
-    uris = PersistedURI.all
+    uris = PersistedURI.all_urn_suffix.map { |urn_suffix| "#{request.url}rd/#{urn_suffix}" }
     erb :index , locals: { uris: uris }
   end
 

@@ -9,9 +9,9 @@
   <input name="url_to_shorten" type='submit' value="Shorten URL"/>
 </form>
 <ul>
-  <% uris.each do |uri| %>
+  <% uris.each do |short_uri| %>
     <li>
-  <%= uri[:short_uri] %>
+  <%= short_uri %>
   </li>
 <% end %>
 </ul>
