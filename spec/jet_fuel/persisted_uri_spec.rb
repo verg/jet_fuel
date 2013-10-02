@@ -19,17 +19,17 @@ describe PersistedURI do
     expect(PersistedURI.find_by_urn("exmpl")).to eq uri
   end
 
-  describe ".all" do
-    it 'retreives all the uris from the db' do
-      uri = PersistedURI.new(short_urn: "jet.io/exmpl",
+  describe ".all_urn_suffix" do
+    it 'retreives all the uris endings from the db' do
+      uri = PersistedURI.new(short_urn: "exmpl",
                              long_uri: "example.com/urn").save
-      other_uri = PersistedURI.new(short_urn: "jet.io/other",
+      other_uri = PersistedURI.new(short_urn: "other",
                                    long_uri: "example.com/other_urn").save
-      expect(PersistedURI.all).to include(uri, other_uri)
+      expect(PersistedURI.all_urn_suffix).to include("exmpl", "other")
     end
 
     it 'returns an empty array when there are no uris persisted' do
-      expect(PersistedURI.all).to eq []
+      expect(PersistedURI.all_urn_suffix).to eq []
     end
   end
 end

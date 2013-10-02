@@ -19,8 +19,8 @@ class PersistedURI
     @@database.select { |uri| uri.short_urn == short_urn }.first
   end
 
-  def self.all
-    @@database || []
+  def self.all_urn_suffix
+    @@database.map { |uri| uri.short_urn } || []
   end
 
   def self.destroy_all
