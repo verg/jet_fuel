@@ -31,11 +31,11 @@ describe "the JetFuel app" do
   describe "GET '/rd/:short_urn'" do
     context "when the urn exists in the db" do
       it 'redirects to the orginal url' do
-        long_uri = "http://example.org/"
-        PersistedURI.stub(:find_by_urn).with("exmpl") { long_uri }
+        uri = double("URI", long_uri: "http://example.org/")
+        PersistedURI.stub(:find_by_urn).with("exmpl") { uri }
         get '/rd/exmpl'
         follow_redirect!
-        expect(last_request.url).to eq long_uri
+        expect(last_request.url).to eq uri.long_uri
       end
     end
 

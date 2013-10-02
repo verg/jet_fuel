@@ -15,7 +15,7 @@ class JetFuel < Sinatra::Base
   end
 
   get '/rd/:short_urn' do
-    uri = PersistedURI.find_by_urn(params[:short_urn])
+    uri = PersistedURI.find_by_urn(params[:short_urn]).long_uri
     redirect uri
   end
 end
