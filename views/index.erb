@@ -5,13 +5,13 @@
 <body>
 <h3>URL Shortening Service</h3>
 <form accept-charset="UTF-8" action="/" method="post">
-  <input type='text' name="url" placeholder="www.example.com"/></br>
-  <input name="url_to_shorten" type='submit' value="Shorten URL"/>
+  <input type='text' name="uri_to_shorten" placeholder="www.example.com"/></br>
+  <input type='submit' value="Shorten URL"/>
 </form>
 <ul>
   <% uris.each do |short_uri| %>
     <li>
-  <%= short_uri %>
+  <a href="<%= short_uri %>"><%= short_uri %></a>
   </li>
 <% end %>
 </ul>

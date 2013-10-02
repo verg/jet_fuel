@@ -6,7 +6,7 @@ When(/^I visit the site$/) do
 end
 
 When(/^give a URL to the service$/) do
-  fill_in "url", with: "www.example.com/url/1"
+  fill_in "uri_to_shorten", with: "www.example.com/url/1"
   click_button "Shorten URL"
 end
 
@@ -15,13 +15,12 @@ Then(/^I expect it to return a service shortened URL$/) do
 end
 
 When(/^I follow a service shortened URL$/) do
-  original_uri = "example.com/page"
+  original_uri = "http://example.com/page"
   short_urn = URIShortener.new.shorten(original_uri)
   PersistedURI.new(short_urn: short_urn, long_uri: original_uri).save
   visit "/rd/#{short_urn}"
 end
 
 Then(/^I expect to be redirected to the original URL$/) do
-  follow_redirect!
-  expect(last_response.url).to eq "www.example.com/page"
+  expect(current_url).to eq "http://example.com/page"
 end
