@@ -19,6 +19,27 @@ describe PersistedURI do
     expect(PersistedURI.find_by_urn("exmpl")).to eq uri
   end
 
+  it "records when the uri was generated" do
+    yesterday = double("yesterday")
+    uri = PersistedURI.new(short_urn: "exmpl" ,
+                           long_uri: "example.com/other_urn",
+                           created_at: yesterday)
+    expect(uri.created_at).to eq yesterday
+  end
+
+  it "has zero clicks initially" do
+    uri = PersistedURI.new(short_urn: "exmpl" ,
+                           long_uri: "example.com/other_urn")
+    expect(uri.click_count).to eq 0
+  end
+
+  it "updates the click count" do
+    uri = PersistedURI.new(short_urn: "exmpl" ,
+                           long_uri: "example.com/other_urn")
+    uri.increment_click_count
+    expect(uri.click_count).to eq 1
+  end
+
   describe ".all_urn_suffix" do
     it 'retreives all the uris endings from the db' do
       uri = PersistedURI.new(short_urn: "exmpl",
