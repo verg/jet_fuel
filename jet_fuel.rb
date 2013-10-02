@@ -9,8 +9,13 @@ class JetFuel < Sinatra::Base
   end
 
   post '/' do
-    short_uri = URIShortener.new("jet.io").shorten(params["uri_to_shorten"])
-    PersistedURI.new(short_uri: short_uri, long_uri: params["uri_to_shorten"]).save
+    short_urn = URIShortener.new.shorten(params["uri_to_shorten"])
+    PersistedURI.new(short_urn: short_urn, long_uri: params["uri_to_shorten"]).save
     redirect '/'
+  end
+
+  get '/rd/:short_urn' do
+    uri = PersistedURI.find_by_urn(params[:short_urn])
+    redirect uri
   end
 end
