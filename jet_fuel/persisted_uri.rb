@@ -3,7 +3,7 @@ require 'yaml/store'
 class PersistedURI
   @@database ||= []
 
-  attr_reader :short_urn
+  attr_reader :short_urn, :long_uri
 
   def initialize(args)
     @short_urn = args.fetch(:short_urn)
