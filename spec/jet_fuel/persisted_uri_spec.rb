@@ -34,8 +34,7 @@ describe PersistedURI do
   end
 
   it "updates the click count" do
-    uri = PersistedURI.new(short_urn: "exmpl" ,
-                           long_uri: "example.com/other_urn")
+    uri = PersistedURI.new(short_urn: "exmpl", long_uri: "example.com/other_urn")
     uri.increment_click_count
     expect(uri.click_count).to eq 1
   end

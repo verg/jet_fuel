@@ -7,10 +7,11 @@ class PersistedURI
   attr_accessor :click_count
 
   def initialize(args)
-    @click_count = 0
+    @click_count = args.fetch("click_count") { 0 }
     @short_urn = args.fetch(:short_urn)
     @long_uri = args.fetch(:long_uri)
     @created_at = args.fetch(:created_at) { Time.now }
+    @created_at = Time.parse(@created_at) if @created_at.class == String
   end
 
   def save
