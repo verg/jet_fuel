@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "the JetFuel app" do
+describe JetFuel do
   describe "GET '/'" do
     it "renders the home page" do
       get '/'
@@ -28,12 +28,12 @@ describe "the JetFuel app" do
     end
   end
 
-  describe "GET '/rd/:short_urn'" do
+  describe "GET '/:short_urn'" do
     context "when the urn exists in the db" do
       it 'redirects to the orginal url' do
-        uri = double("URI", long_uri: "http://example.org/")
-        PersistedURI.stub(:find_by_urn).with("exmpl") { uri }
-        get '/rd/exmpl'
+        uri = PersistedURI.new(short_urn: "1exmpl",
+                               long_uri: "http://example.com/urn").save
+        get '/1exmpl'
         follow_redirect!
         expect(last_request.url).to eq uri.long_uri
       end

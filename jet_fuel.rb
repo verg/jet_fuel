@@ -14,8 +14,9 @@ class JetFuel < Sinatra::Base
     redirect '/'
   end
 
-  get '/rd/:short_urn' do
-    uri = PersistedURI.find_by_urn(params[:short_urn]).long_uri
-    redirect uri
+  # Shortened URNs begin with a digit, followed by random url safe chars
+  get %r{/(\d+\w*)} do |short_urn|
+    uri = PersistedURI.find_by_urn(short_urn)
+    redirect uri.long_uri
   end
 end
