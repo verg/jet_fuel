@@ -3,6 +3,7 @@ source "https://rubygems.org"
 
 gem "sinatra"
 gem "redis"
+gem "json"
 
 gem "cucumber"
 gem "pry"
