@@ -29,4 +29,11 @@ describe URIShortener do
     expect(uri).not_to match /duplicate_urn/
     expect(uri).to match /uniq_urn/
   end
+
+  it "always begins URIs with numbers" do
+    3.times do
+      shortener = URIShortener.new
+      expect(shortener.shorten("http://example.com/thing")).to match(/\A\d+/)
+    end
+  end
 end
