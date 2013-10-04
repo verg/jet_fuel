@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe JetFuel do
+  before do
+    PersistedURI.destroy_all
+  end
+
   describe "GET '/'" do
     it "renders the home page" do
       get '/'
@@ -36,6 +40,14 @@ describe JetFuel do
         get '/1exmpl'
         follow_redirect!
         expect(last_request.url).to eq uri.long_uri
+      end
+
+      it "increments the click count" do
+        PersistedURI.new(short_urn: "1exmpl",
+                               long_uri: "http://example.com/urn").save
+        uri  = PersistedURI.find_by_urn("1exmpl")
+        get '/1exmpl'
+        expect(uri.click_count).to eq 1
       end
     end
 
