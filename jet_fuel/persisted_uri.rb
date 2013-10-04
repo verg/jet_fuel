@@ -29,6 +29,10 @@ class PersistedURI
     @@database.map { |uri| uri.short_urn } || []
   end
 
+  def self.all
+    @@database || []
+  end
+
   def self.destroy_all
     @@database = []
   end

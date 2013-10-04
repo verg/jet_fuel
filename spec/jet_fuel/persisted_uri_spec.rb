@@ -52,4 +52,18 @@ describe PersistedURI do
       expect(PersistedURI.all_short_urn).to eq []
     end
   end
+
+  describe ".all" do
+    it 'retreives all the uris endings from the db' do
+      uri = PersistedURI.new(short_urn: "exmpl",
+                             long_uri: "example.com/urn").save
+      other_uri = PersistedURI.new(short_urn: "other",
+                                   long_uri: "example.com/other_urn").save
+      expect(PersistedURI.all).to include(uri, other_uri)
+    end
+
+    it 'returns an empty array when there are no uris persisted' do
+      expect(PersistedURI.all).to eq []
+    end
+  end
 end
