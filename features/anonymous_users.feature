@@ -11,3 +11,8 @@ Feature: Anonymous Users can use the site
     When I follow a service shortened URL
     Then I expect to be redirected to the original URL
 
+  Scenario: Anonymous user visits the home page
+    Given that I am an anonymous user of the system
+    When There are multiple URLs with various popularity
+    And I visit the site
+    Then I expect to see URLs sorted by popularity
