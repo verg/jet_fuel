@@ -30,7 +30,7 @@ class PersistedURI
   end
 
   def self.all
-    @@database || []
+    @@database.sort { |uri| uri.click_count }.reverse || []
   end
 
   def self.destroy_all

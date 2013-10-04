@@ -54,13 +54,16 @@ describe PersistedURI do
   end
 
   describe ".all" do
-    it 'retreives all the uris endings from the db' do
-      uri = PersistedURI.new(short_urn: "exmpl",
-                             long_uri: "example.com/urn").save
-      other_uri = PersistedURI.new(short_urn: "other",
-                                   long_uri: "example.com/other_urn").save
-      expect(PersistedURI.all).to include(uri, other_uri)
+    it 'retreives all the URIs, sorted by number of clicks, descending' do
+      never_been_clicked = PersistedURI.new(short_urn: "exmpl",
+                                            long_uri: "example.com/urn").save
+      popular_uri = PersistedURI.new("click_count" => 2, short_urn: "other",
+                                     long_uri: "example.com/other_urn").save
+
+      PersistedURI.all.should == [popular_uri, never_been_clicked]
     end
+
+    it "optionally sorts by the created_at date"
 
     it 'returns an empty array when there are no uris persisted' do
       expect(PersistedURI.all).to eq []
