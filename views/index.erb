@@ -9,9 +9,9 @@
   <input type='submit' value="Shorten URL"/>
 </form>
 <ul>
-  <% uris.each do |short_uri| %>
+  <% uris.each do |uri| %>
     <li>
-  <a href="<%= short_uri %>"><%= short_uri %></a>
+    <a href="<%= "#{request.url}#{uri.short_urn}" %>"><%= "#{request.url}#{uri.short_urn}"%></a>
   </li>
 <% end %>
 </ul>
