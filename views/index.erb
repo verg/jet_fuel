@@ -8,12 +8,21 @@
   <input type='text' name="uri_to_shorten" placeholder="www.example.com"/></br>
   <input type='submit' value="Shorten URL"/>
 </form>
-<ul>
+<table>
+  <% if uris.any? %>
+    <tr>
+    <th>Shortened URL</th>
+    <th>Clicks</th>
+    <th>Created</th>
+  </tr>
   <% uris.each do |uri| %>
-    <li>
-    <a href="<%= "#{request.url}#{uri.short_urn}" %>"><%= "#{request.url}#{uri.short_urn}"%></a>
-  </li>
+    <tr>
+    <td><a href="<%= "#{request.url}#{uri.short_urn}" %>"><%= "#{request.url}#{uri.short_urn}"%></a></td>
+    <td><%= uri.click_count %></td>
+    <td><%= uri.created_at.strftime("%d/%m/%y") %></td>
+  </th>
 <% end %>
-</ul>
+<% end %>
+</table>
 </body>
 </html>
